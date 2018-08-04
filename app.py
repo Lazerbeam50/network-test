@@ -11,13 +11,9 @@ class Echo(protocol.Protocol):
 
 def main():
     """This runs the protocol on port 8000"""
-    ip   = os.environ['OPENSHIFT_PYTHON_IP']
-    port = int(os.environ['OPENSHIFT_PYTHON_PORT'])
-    print(ip)
-    print(port)
     factory = protocol.ServerFactory()
     factory.protocol = Echo
-    reactor.listenTCP(port, factory, interface=ip)
+    reactor.listenTCP(8080, factory)
     reactor.run()
 
 # this only runs if the module was *not* imported
