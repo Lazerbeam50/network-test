@@ -10,7 +10,7 @@ class Echo(protocol.Protocol):
 def main():
     factory = protocol.ServerFactory()
     factory.protocol = Echo
-    reactor.listenTCP(8080, factory)
+    reactor.listenTCP(31563, factory)
     reactor.run()
 
 # this only runs if the module was *not* imported
