@@ -1,20 +1,16 @@
-from twisted.internet import reactor, protocol
+from twisted.web import http
+from twisted.internet import reactor
 
-class Echo(protocol.Protocol):
-    """This is just about the simplest possible protocol"""
+class Echo(http.HTTPChannel):
     
-    def dataReceived(self, data):
-        "As soon as any data is received, write it back."
-        self.transport.write(data)
-
-
+    def lineReceived(self, line):
+        self.transport.write(line)
+        
 def main():
-    """This runs the protocol on port 8000"""
-    factory = protocol.ServerFactory()
+    factory = http.HTTPFactory()
     factory.protocol = Echo
     reactor.listenTCP(8080, factory)
     reactor.run()
-
-# this only runs if the module was *not* imported
+    
 if __name__ == '__main__':
     main()
